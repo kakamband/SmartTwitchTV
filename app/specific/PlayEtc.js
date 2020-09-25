@@ -1844,11 +1844,14 @@ function Play_MakeControls() {
 
             if (!this.defaultValue) {
 
-                var i = 0, len = Play_MultiArray.length;
-                for (i; i < len; i++) {
+                var i = 0;
+
+                for (i; i < Play_MultiArray_length; i++) {
+
                     if (Play_MultiArray[i].data.length > 0) {
                         OSInterface_StartMultiStream(i, Play_MultiArray[i].AutoUrl, Play_MultiArray[i].playlist);
                     }
+
                 }
 
             } else {
@@ -1912,8 +1915,10 @@ function Play_MakeControls() {
 
                 if (Play_MultiEnable) {
 
-                    var i = 0, len = Play_MultiArray.length;
-                    for (i; i < len; i++) {
+                    var i = 0;
+
+                    for (i; i < Play_MultiArray_length; i++) {
+
                         if (Play_MultiArray[i].data.length > 0) {
                             OSInterface_StartMultiStream(i, Play_MultiArray[i].AutoUrl, Play_MultiArray[i].playlist);
                         }

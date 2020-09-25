@@ -19,6 +19,7 @@
  */
 
 //All multistream related fun are placed here
+var Play_MultiArray_length = 4;
 
 function Play_updateStreamInfoMulti(pos) {
     Main_setTimeout(
@@ -221,10 +222,13 @@ function Play_Multi_UnSetPanel(shutdown) {
 }
 
 function Play_MultiFirstAvailable() {
-    var i = 0, len = Play_MultiArray.length;
-    for (i; i < len; i++) {
+    var i = 0;
+
+    for (i; i < Play_MultiArray_length; i++) {
+
         if (Play_MultiArray[i].data.length > 0) return i;
     }
+
     return null;
 }
 
@@ -254,20 +258,28 @@ function Play_MultiEnd(position, fail_type) {
 }
 
 function Play_MultiFirstClear() {
-    var i = 0, len = Play_MultiArray.length;
-    for (i; i < len; i++) {
+    var i = 0;
+
+    for (i; i < Play_MultiArray_length; i++) {
+
         if (Play_MultiArray[i].data.length < 1) return i;
+
     }
     return 0;
 }
 
 function Play_MultiIsAlredyOPen(Id) {
-    var i = 0, len = Play_MultiArray.length;
-    for (i; i < len; i++) {
+    var i = 0;
+
+    for (i; i < Play_MultiArray_length; i++) {
+
         if (Play_MultiArray[i].data.length > 0 && Play_MultiArray[i].data[14] === Id) {
+
             UserLiveFeed_ResetFeedId();
             return true;
+
         }
+
     }
 
     return false;
@@ -436,7 +448,6 @@ function Play_MultiStartQualitySucess(pos, theUrl, playlist) {
     Play_updateVodInfo(Play_MultiArray[pos].data[14], Play_MultiArray[pos].data[7], 0);
     Play_data_old = JSON.parse(JSON.stringify(Play_data_base));
 
-    Play_MultiCheckLiveFeed(pos, 0);
     Play_updateStreamInfoMulti(pos);
 }
 
@@ -446,29 +457,6 @@ function Play_MultiUpdateMain() {
     Play_controls[Play_controlsGameCont].setLable(Play_data.data[3]);
     Play_CheckFollow(Play_data.data[14]);
     Main_SaveValues();
-}
-
-function Play_MultiCheckLiveFeed(pos, tryes) {
-    Main_setTimeout(
-        function() {
-            //if vod supported adedded
-            // var id = UserLiveFeed_FeedPosX >= UserLiveFeedobj_UserVodPos ?
-            //     Play_MultiArray[pos].data[7] :
-            //     Play_MultiArray[pos].data[14];
-
-            if (Play_PreviewId && Main_A_equals_B(Play_MultiArray[pos].data[14], Play_PreviewId)) {
-
-                UserLiveFeed_CheckIfIsLiveSTop();
-
-            } else if (tryes < 7) {
-
-                Play_MultiCheckLiveFeed(pos, tryes + 1);
-
-            }
-
-        },
-        250
-    );
 }
 
 function Play_MultiEnableKeyRightLeft(adder) {
