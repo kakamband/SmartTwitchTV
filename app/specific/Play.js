@@ -504,6 +504,8 @@ function Play_CheckIfIsLiveClean(fail_type) {//called from java
             }
 
         } else {
+            OSInterface_ClearSidePanelPlayer();
+
             Screens_LoadPreviewWarn(
                 reason,
                 Main_values.Main_Go,

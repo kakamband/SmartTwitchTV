@@ -671,7 +671,7 @@ function Play_MultiSetUpdateDialog(obj) {
     Main_innerHTML('stream_dialog_multi_game-1', obj[3] === '' ? STR_SPACE : obj[3]);
     Main_innerHTML('stream_dialog_multi_title-1', twemoji.parse(obj[2]));
 
-    UserLiveFeed_Hide(true);
+    UserLiveFeed_Hide(Play_PreviewId);
     Play_MultiDialogPos = 0;
     Play_MultiAddFocus();
     Play_ShowMultiDialog();

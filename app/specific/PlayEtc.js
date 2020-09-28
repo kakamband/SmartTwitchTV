@@ -1455,7 +1455,7 @@ function Play_handleKeyDown(e) {
                     Play_setHidePanel();
 
                 } else if (Play_MultiDialogVisible()) {
-                    Play_HideMultiDialog(true);
+                    Play_HideMultiDialog(Play_PreviewId);
                     var pos = (Play_MultiDialogPos + Play_Multi_Offset) % 4;
                     Main_Set_history('live', Play_MultiArray[pos].data);//save before we change
                     Play_MultiStartPrestart(pos);

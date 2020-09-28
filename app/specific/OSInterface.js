@@ -67,7 +67,7 @@ function OSInterface_RunNotificationService() {
 //Android specific: true
 //Allows to stop the notification service from js side
 function OSInterface_upNotificationState(Notify) {
-    if (Main_IsOn_OSInterface) Android.upNotificationState(Notify);
+    if (Main_IsOn_OSInterface) Android.upNotificationState(Boolean(Notify));
 }
 
 //public void SetNotificationLive(boolean Notify)
@@ -75,7 +75,7 @@ function OSInterface_upNotificationState(Notify) {
 //Android specific: true
 //Set if live notifications are enable
 function OSInterface_SetNotificationLive(Notify) {
-    if (Main_IsOn_OSInterface) Android.SetNotificationLive(Notify);
+    if (Main_IsOn_OSInterface) Android.SetNotificationLive(Boolean(Notify));
 }
 
 //public void SetNotificationLive(boolean Notify)
@@ -83,7 +83,7 @@ function OSInterface_SetNotificationLive(Notify) {
 //Android specific: true
 //Set if live title change notifications are enable
 function OSInterface_SetNotificationTitle(Notify) {
-    if (Main_IsOn_OSInterface) Android.SetNotificationTitle(Notify);
+    if (Main_IsOn_OSInterface) Android.SetNotificationTitle(Boolean(Notify));
 }
 
 //public void SetNotificationLive(boolean Notify)
@@ -91,7 +91,7 @@ function OSInterface_SetNotificationTitle(Notify) {
 //Android specific: true
 //Set if live game change notifications are enable
 function OSInterface_SetNotificationGame(Notify) {
-    if (Main_IsOn_OSInterface) Android.SetNotificationGame(Notify);
+    if (Main_IsOn_OSInterface) Android.SetNotificationGame(Boolean(Notify));
 }
 
 //public void SetNotificationLive(boolean Notify)
@@ -99,7 +99,7 @@ function OSInterface_SetNotificationGame(Notify) {
 //Android specific: true
 //Set if live games notifications are enable
 function OSInterface_SetNotificationGameLive(Notify) {
-    if (Main_IsOn_OSInterface) Android.SetNotificationGameLive(Notify);
+    if (Main_IsOn_OSInterface) Android.SetNotificationGameLive(Boolean(Notify));
 }
 
 //public void Settings_SetPingWarning(boolean warning)
@@ -107,7 +107,7 @@ function OSInterface_SetNotificationGameLive(Notify) {
 //Android specific: true
 //Allows to enable disable ping ail warning
 function OSInterface_Settings_SetPingWarning(warning) {
-    if (Main_IsOn_OSInterface) Android.Settings_SetPingWarning(warning);
+    if (Main_IsOn_OSInterface) Android.Settings_SetPingWarning(Boolean(warning));
 }
 
 //public void SetQuality(int position)
@@ -249,7 +249,7 @@ function OSInterface_mupdatesizePP(isFullScreen) {
 //Android specific: false in the OS has multi player supports Samsung TV for example don't have
 //Allows to change player size on PP mode
 function OSInterface_mupdatesize(isFullScreen) {
-    Android.mupdatesize(isFullScreen);
+    Android.mupdatesize(Boolean(isFullScreen));
 }
 
 //public void SetFullScreenPosition(int mFullScreenPosition)
@@ -290,7 +290,7 @@ function OSInterface_mSetPlayerSize(mPicturePictureSize) {
 //Android specific: false in the OS has multi player supports Samsung TV for example don't have
 //changes all player to surface_view or texture_view for PP workaround
 function OSInterface_msetPlayer(surface_view, FullScreen) {
-    if (Main_IsOn_OSInterface) Android.msetPlayer(surface_view, FullScreen);
+    if (Main_IsOn_OSInterface) Android.msetPlayer(surface_view, Boolean(FullScreen));
 }
 
 //public void SetBuffer(int who_called, int buffer_size)
@@ -485,7 +485,7 @@ function OSInterface_PlayPauseChange() {
 //Android specific: false
 //Allows to set the playback state
 function OSInterface_PlayPause(state) {
-    Android.PlayPause(state);
+    Android.PlayPause(Boolean(state));
 }
 
 //public String getversion()
@@ -606,7 +606,7 @@ function OSInterface_setBlackListMediaCodec(CodecList) {
 //Android specific: true
 //Shows a spinning ProgressBar
 function OSInterface_mshowLoading(show) {
-    Android.mshowLoading(show);
+    Android.mshowLoading(Boolean(show));
 }
 
 //public String getWebviewVersion()
@@ -621,7 +621,7 @@ function OSInterface_getWebviewVersion() {
 //Android specific: true
 //closes or minimize the app
 function OSInterface_mclose(close) {
-    Android.mclose(close);
+    Android.mclose(Boolean(close));
 }
 
 //public void mloadUrl(String url)
@@ -650,7 +650,7 @@ function OSInterface_LongLog(log) {
 //Android specific: true
 //request the video status dropped frames, buffer size etc
 function OSInterface_getVideoStatus(showLatency) {
-    Android.getVideoStatus(showLatency);
+    Android.getVideoStatus(Boolean(showLatency));
 }
 
 //public void getVideoQuality(int who_called)
@@ -685,7 +685,7 @@ function OSInterface_StartMultiStream(position, uri, mainPlaylistString) {
 //Android specific: true
 //Start MultiStream and allows to change its mode
 function OSInterface_EnableMultiStream(MainBig, offset) {
-    Android.EnableMultiStream(MainBig, offset);
+    Android.EnableMultiStream(Boolean(MainBig), offset);
 }
 
 //public void setPlaybackSpeed(float speed)
@@ -760,7 +760,7 @@ function OSInterface_PrepareForMulti(uri, mainPlaylistString) {
 //Android specific: true
 //Start MultiStream at position
 function OSInterface_StartFeedPlayer(uri, mainPlaylistString, position, resumePosition, isVod) {
-    Android.StartFeedPlayer(uri, mainPlaylistString, position, resumePosition, isVod);
+    Android.StartFeedPlayer(uri, mainPlaylistString, position, resumePosition, Boolean(isVod));
 }
 
 //public void StartFeedPlayer(String uri, String mainPlaylistString, , int top, int right, int bottom, int left)
@@ -828,7 +828,7 @@ function OSInterface_StartScreensPlayer(uri, mainPlaylistString, ResumePosition,
 
 }
 
-//public void StartScreensPlayer(float bottom, float right, float left, int web_height, int who_called, boolean bigger)
+//public void StartScreensPlayer(float bottom, float right, float left, int web_height, int who_called)
 //uri =  the url of the playlist or the clip
 //mainPlaylistString = the stringify version of the url playlist content
 //top, right, left = 'side_panel_feed_thumb'.getBoundingClientRect()
@@ -988,7 +988,7 @@ function OSInterface_getLatency(chat_number) {
 //Android specific: true
 //Allows to control if the screen will be on or not from js side
 function OSInterface_mKeepScreenOn(keepOn) {//Not be used
-    if (Main_IsOn_OSInterface) Android.mKeepScreenOn(keepOn);
+    if (Main_IsOn_OSInterface) Android.mKeepScreenOn(Boolean(keepOn));
 }
 
 //public void getDuration()
