@@ -2042,7 +2042,7 @@ function Play_OpenFeed(keyfun) {
             return;
         }
 
-        UserLiveFeed_Hide(true);
+        UserLiveFeed_Hide(Play_PreviewId);
 
         Play_data = JSON.parse(JSON.stringify(Play_data_base));
         Play_PreviewOffset = OSInterface_gettimepreview() / 1000;
@@ -2061,7 +2061,7 @@ function Play_OpenFeed(keyfun) {
         );
 
     } else {
-        UserLiveFeed_Hide(true);
+        UserLiveFeed_Hide(Play_PreviewId);
 
         Play_OpenLiveStream(keyfun);
     }
