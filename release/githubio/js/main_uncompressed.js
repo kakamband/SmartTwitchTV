@@ -12203,7 +12203,7 @@
 
     function Play_StartStayShowbottom() {
         Play_BottomShow(Play_MultiStream);
-        Play_BottomShow(Play_controlsQuality);
+        if (!PlayExtra_PicturePicture) Play_BottomShow(Play_controlsQuality);
         Play_BottomShow(Play_controlsExternal);
         Play_BottomShow(Play_controlsLowLatency);
         Play_BottomShow(Play_controlsSpeed);
