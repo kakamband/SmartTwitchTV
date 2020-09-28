@@ -6993,7 +6993,7 @@
     var Main_stringVersion_Min = '.261';
     var Main_version_java = 45; //Always update (+1 to current value) Main_version_java after update Main_stringVersion_Min or a major update of the apk is released
     var Main_minversion = 'September 27 2020';
-    var Main_version_web = 85; //Always update (+1 to current value) Main_version_web after update Main_minversion or a major update of the web part of the app
+    var Main_version_web = 86; //Always update (+1 to current value) Main_version_web after update Main_minversion or a major update of the web part of the app
     var Main_versionTag = Main_stringVersion + Main_stringVersion_Min + '-' + Main_minversion;
 
     var Main_cursorYAddFocus = -1;
@@ -8866,7 +8866,7 @@
     }
 
     function Main_A_includes_B(A, B) {
-        return A ? A.includes(B) : false;
+        return A ? A.indexOf(B) !== -1 : false;
     }
 
     function Main_A_equals_B(A, B) { // jshint ignore:line
@@ -9031,15 +9031,18 @@
         if (PlayClip_isOn) PlayClip_Resume();
         else if (Play_isOn) {
             if (Play_MultiEnable) {
-                var i = 0,
-                    len = Play_MultiArray.length;
-                for (i; i < len; i++) {
+                var i = 0;
+
+                for (i; i < Play_MultiArray_length; i++) {
+
                     if (Play_MultiArray[i].data.length > 0) {
 
                         Main_Set_history('live', Play_MultiArray[i].data);
 
                     }
+
                 }
+
             } else if (PlayExtra_PicturePicture) {
 
                 if (PlayExtra_data.data.length > 0) Main_Set_history('live', PlayExtra_data.data);
@@ -9694,7 +9697,7 @@
     //Android specific: true
     //Allows to stop the notification service from js side
     function OSInterface_upNotificationState(Notify) {
-        if (Main_IsOn_OSInterface) Android.upNotificationState(Notify);
+        if (Main_IsOn_OSInterface) Android.upNotificationState(Boolean(Notify));
     }
 
     //public void SetNotificationLive(boolean Notify)
@@ -9702,7 +9705,7 @@
     //Android specific: true
     //Set if live notifications are enable
     function OSInterface_SetNotificationLive(Notify) {
-        if (Main_IsOn_OSInterface) Android.SetNotificationLive(Notify);
+        if (Main_IsOn_OSInterface) Android.SetNotificationLive(Boolean(Notify));
     }
 
     //public void SetNotificationLive(boolean Notify)
@@ -9710,7 +9713,7 @@
     //Android specific: true
     //Set if live title change notifications are enable
     function OSInterface_SetNotificationTitle(Notify) {
-        if (Main_IsOn_OSInterface) Android.SetNotificationTitle(Notify);
+        if (Main_IsOn_OSInterface) Android.SetNotificationTitle(Boolean(Notify));
     }
 
     //public void SetNotificationLive(boolean Notify)
@@ -9718,7 +9721,7 @@
     //Android specific: true
     //Set if live game change notifications are enable
     function OSInterface_SetNotificationGame(Notify) {
-        if (Main_IsOn_OSInterface) Android.SetNotificationGame(Notify);
+        if (Main_IsOn_OSInterface) Android.SetNotificationGame(Boolean(Notify));
     }
 
     //public void SetNotificationLive(boolean Notify)
@@ -9726,7 +9729,7 @@
     //Android specific: true
     //Set if live games notifications are enable
     function OSInterface_SetNotificationGameLive(Notify) {
-        if (Main_IsOn_OSInterface) Android.SetNotificationGameLive(Notify);
+        if (Main_IsOn_OSInterface) Android.SetNotificationGameLive(Boolean(Notify));
     }
 
     //public void Settings_SetPingWarning(boolean warning)
@@ -9734,7 +9737,7 @@
     //Android specific: true
     //Allows to enable disable ping ail warning
     function OSInterface_Settings_SetPingWarning(warning) {
-        if (Main_IsOn_OSInterface) Android.Settings_SetPingWarning(warning);
+        if (Main_IsOn_OSInterface) Android.Settings_SetPingWarning(Boolean(warning));
     }
 
     //public void SetQuality(int position)
@@ -9876,7 +9879,7 @@
     //Android specific: false in the OS has multi player supports Samsung TV for example don't have
     //Allows to change player size on PP mode
     function OSInterface_mupdatesize(isFullScreen) {
-        Android.mupdatesize(isFullScreen);
+        Android.mupdatesize(Boolean(isFullScreen));
     }
 
     //public void SetFullScreenPosition(int mFullScreenPosition)
@@ -9917,7 +9920,7 @@
     //Android specific: false in the OS has multi player supports Samsung TV for example don't have
     //changes all player to surface_view or texture_view for PP workaround
     function OSInterface_msetPlayer(surface_view, FullScreen) {
-        if (Main_IsOn_OSInterface) Android.msetPlayer(surface_view, FullScreen);
+        if (Main_IsOn_OSInterface) Android.msetPlayer(surface_view, Boolean(FullScreen));
     }
 
     //public void SetBuffer(int who_called, int buffer_size)
@@ -10113,7 +10116,7 @@
     //Android specific: false
     //Allows to set the playback state
     function OSInterface_PlayPause(state) {
-        Android.PlayPause(state);
+        Android.PlayPause(Boolean(state));
     }
 
     //public String getversion()
@@ -10234,7 +10237,7 @@
     //Android specific: true
     //Shows a spinning ProgressBar
     function OSInterface_mshowLoading(show) {
-        Android.mshowLoading(show);
+        Android.mshowLoading(Boolean(show));
     }
 
     //public String getWebviewVersion()
@@ -10249,7 +10252,7 @@
     //Android specific: true
     //closes or minimize the app
     function OSInterface_mclose(close) {
-        Android.mclose(close);
+        Android.mclose(Boolean(close));
     }
 
     //public void mloadUrl(String url)
@@ -10278,7 +10281,7 @@
     //Android specific: true
     //request the video status dropped frames, buffer size etc
     function OSInterface_getVideoStatus(showLatency) {
-        Android.getVideoStatus(showLatency);
+        Android.getVideoStatus(Boolean(showLatency));
     }
 
     //public void getVideoQuality(int who_called)
@@ -10313,7 +10316,7 @@
     //Android specific: true
     //Start MultiStream and allows to change its mode
     function OSInterface_EnableMultiStream(MainBig, offset) {
-        Android.EnableMultiStream(MainBig, offset);
+        Android.EnableMultiStream(Boolean(MainBig), offset);
     }
 
     //public void setPlaybackSpeed(float speed)
@@ -10388,7 +10391,7 @@
     //Android specific: true
     //Start MultiStream at position
     function OSInterface_StartFeedPlayer(uri, mainPlaylistString, position, resumePosition, isVod) {
-        Android.StartFeedPlayer(uri, mainPlaylistString, position, resumePosition, isVod);
+        Android.StartFeedPlayer(uri, mainPlaylistString, position, resumePosition, Boolean(isVod));
     }
 
     //public void StartFeedPlayer(String uri, String mainPlaylistString, , int top, int right, int bottom, int left)
@@ -10456,7 +10459,7 @@
 
     }
 
-    //public void StartScreensPlayer(float bottom, float right, float left, int web_height, int who_called, boolean bigger)
+    //public void StartScreensPlayer(float bottom, float right, float left, int web_height, int who_called)
     //uri =  the url of the playlist or the clip
     //mainPlaylistString = the stringify version of the url playlist content
     //top, right, left = 'side_panel_feed_thumb'.getBoundingClientRect()
@@ -10616,7 +10619,7 @@
     //Android specific: true
     //Allows to control if the screen will be on or not from js side
     function OSInterface_mKeepScreenOn(keepOn) { //Not be used
-        if (Main_IsOn_OSInterface) Android.mKeepScreenOn(keepOn);
+        if (Main_IsOn_OSInterface) Android.mKeepScreenOn(Boolean(keepOn));
     }
 
     //public void getDuration()
@@ -11074,7 +11077,7 @@
         }
     }
 
-    function PlayClip_PreshutdownStream(closePlayer, PreventcleanQuailities) {
+    function PlayClip_PreshutdownStream(closePlayer) {
         //Main_Log('PlayClip_PreshutdownStream ' + closePlayer);
 
         Main_history_UpdateVodClip(ChannelClip_Id, Main_IsOn_OSInterface ? (parseInt(OSInterface_gettime() / 1000)) : 0, 'clip');
@@ -11087,7 +11090,7 @@
         Chat_Clear();
         Play_ClearPlayer();
 
-        if (!Play_PreviewId) UserLiveFeed_Hide(PreventcleanQuailities);
+        if (!Play_PreviewId) UserLiveFeed_Hide();
         else UserLiveFeed_HideAfter();
 
         PlayClip_qualities = [];
@@ -11196,7 +11199,7 @@
     }
 
     function PlayClip_showPanel() {
-        PlayVod_RefreshProgressBarrStart();
+        PlayVod_RefreshProgressBarrStart(false, 2);
         Play_CleanHideExit();
         Play_BottonIconsResetFocus();
         PlayClip_qualityIndexReset();
@@ -11281,7 +11284,7 @@
     }
 
     function PlayClip_OpenLiveStream() {
-        PlayClip_PreshutdownStream(true, true);
+        PlayClip_PreshutdownStream(true);
         Play_OpenFeed(PlayClip_handleKeyDown);
     }
 
@@ -13001,7 +13004,7 @@
                         Play_setHidePanel();
 
                     } else if (Play_MultiDialogVisible()) {
-                        Play_HideMultiDialog(true);
+                        Play_HideMultiDialog(Play_PreviewId);
                         var pos = (Play_MultiDialogPos + Play_Multi_Offset) % 4;
                         Main_Set_history('live', Play_MultiArray[pos].data); //save before we change
                         Play_MultiStartPrestart(pos);
@@ -13390,12 +13393,14 @@
 
                 if (!this.defaultValue) {
 
-                    var i = 0,
-                        len = Play_MultiArray.length;
-                    for (i; i < len; i++) {
+                    var i = 0;
+
+                    for (i; i < Play_MultiArray_length; i++) {
+
                         if (Play_MultiArray[i].data.length > 0) {
                             OSInterface_StartMultiStream(i, Play_MultiArray[i].AutoUrl, Play_MultiArray[i].playlist);
                         }
+
                     }
 
                 } else {
@@ -13459,9 +13464,10 @@
 
                     if (Play_MultiEnable) {
 
-                        var i = 0,
-                            len = Play_MultiArray.length;
-                        for (i; i < len; i++) {
+                        var i = 0;
+
+                        for (i; i < Play_MultiArray_length; i++) {
+
                             if (Play_MultiArray[i].data.length > 0) {
                                 OSInterface_StartMultiStream(i, Play_MultiArray[i].AutoUrl, Play_MultiArray[i].playlist);
                             }
@@ -15209,6 +15215,7 @@
         Play_data.watching_time = new Date().getTime();
         Main_textContentWithEle(Play_infoWatchingTime, ", " + STR_WATCHING + Play_timeS(0));
         PlayClip_SetProgressBarJumpers();
+        PlayVod_previews_clear();
 
         Main_textContentWithEle(Play_infoLiveTime, Play_timeMs(0));
 
@@ -15396,6 +15403,8 @@
                 }
 
             } else {
+                OSInterface_ClearSidePanelPlayer();
+
                 Screens_LoadPreviewWarn(
                     reason,
                     Main_values.Main_Go,
@@ -15456,14 +15465,16 @@
                 ChatLive_Init(0);
                 Play_data.watching_time = new Date().getTime();
 
-                var i = 0,
-                    len = Play_MultiArray.length;
-                for (i; i < len; i++) {
+                var i = 0;
+
+                for (i; i < Play_MultiArray_length; i++) {
+
                     if (Play_MultiArray[i].data.length > 0) {
 
                         Play_MultiStart(i);
 
                     }
+
                 }
             } else {
                 Play_data.watching_time = new Date().getTime();
@@ -15662,11 +15673,15 @@
 
     function Play_updateStreamInfo() {
         if (Play_MultiEnable) {
-            var i = 0,
-                len = Play_MultiArray.length;
-            for (i; i < len; i++) {
+
+            var i = 0;
+
+            for (i; i < Play_MultiArray_length; i++) {
+
                 Play_updateStreamInfoMulti(i);
+
             }
+
         } else {
             //When update this also update PlayExtra_updateStreamInfo
             Play_updateStreamInfoGet(
@@ -16935,7 +16950,7 @@
                 return;
             }
 
-            UserLiveFeed_Hide(true);
+            UserLiveFeed_Hide(Play_PreviewId);
 
             Play_data = JSON.parse(JSON.stringify(Play_data_base));
             Play_PreviewOffset = OSInterface_gettimepreview() / 1000;
@@ -16954,7 +16969,7 @@
             );
 
         } else {
-            UserLiveFeed_Hide(true);
+            UserLiveFeed_Hide(Play_PreviewId);
 
             Play_OpenLiveStream(keyfun);
         }
@@ -17078,6 +17093,7 @@
      */
 
     //All multistream related fun are placed here
+    var Play_MultiArray_length = 4;
 
     function Play_updateStreamInfoMulti(pos) {
         Main_setTimeout(
@@ -17280,11 +17296,13 @@
     }
 
     function Play_MultiFirstAvailable() {
-        var i = 0,
-            len = Play_MultiArray.length;
-        for (i; i < len; i++) {
+        var i = 0;
+
+        for (i; i < Play_MultiArray_length; i++) {
+
             if (Play_MultiArray[i].data.length > 0) return i;
         }
+
         return null;
     }
 
@@ -17314,22 +17332,28 @@
     }
 
     function Play_MultiFirstClear() {
-        var i = 0,
-            len = Play_MultiArray.length;
-        for (i; i < len; i++) {
+        var i = 0;
+
+        for (i; i < Play_MultiArray_length; i++) {
+
             if (Play_MultiArray[i].data.length < 1) return i;
+
         }
         return 0;
     }
 
     function Play_MultiIsAlredyOPen(Id) {
-        var i = 0,
-            len = Play_MultiArray.length;
-        for (i; i < len; i++) {
+        var i = 0;
+
+        for (i; i < Play_MultiArray_length; i++) {
+
             if (Play_MultiArray[i].data.length > 0 && Play_MultiArray[i].data[14] === Id) {
+
                 UserLiveFeed_ResetFeedId();
                 return true;
+
             }
+
         }
 
         return false;
@@ -17498,7 +17522,6 @@
         Play_updateVodInfo(Play_MultiArray[pos].data[14], Play_MultiArray[pos].data[7], 0);
         Play_data_old = JSON.parse(JSON.stringify(Play_data_base));
 
-        Play_MultiCheckLiveFeed(pos, 0);
         Play_updateStreamInfoMulti(pos);
     }
 
@@ -17508,29 +17531,6 @@
         Play_controls[Play_controlsGameCont].setLable(Play_data.data[3]);
         Play_CheckFollow(Play_data.data[14]);
         Main_SaveValues();
-    }
-
-    function Play_MultiCheckLiveFeed(pos, tryes) {
-        Main_setTimeout(
-            function() {
-                //if vod supported adedded
-                // var id = UserLiveFeed_FeedPosX >= UserLiveFeedobj_UserVodPos ?
-                //     Play_MultiArray[pos].data[7] :
-                //     Play_MultiArray[pos].data[14];
-
-                if (Play_PreviewId && Main_A_equals_B(Play_MultiArray[pos].data[14], Play_PreviewId)) {
-
-                    UserLiveFeed_CheckIfIsLiveSTop();
-
-                } else if (tryes < 7) {
-
-                    Play_MultiCheckLiveFeed(pos, tryes + 1);
-
-                }
-
-            },
-            250
-        );
     }
 
     function Play_MultiEnableKeyRightLeft(adder) {
@@ -17748,7 +17748,7 @@
         Main_innerHTML('stream_dialog_multi_game-1', obj[3] === '' ? STR_SPACE : obj[3]);
         Main_innerHTML('stream_dialog_multi_title-1', twemoji.parse(obj[2]));
 
-        UserLiveFeed_Hide(true);
+        UserLiveFeed_Hide(Play_PreviewId);
         Play_MultiDialogPos = 0;
         Play_MultiAddFocus();
         Play_ShowMultiDialog();
@@ -20505,16 +20505,16 @@
             doc = Main_getElementById(ScreenObj[x].ids[3] + ScreenObj[x].posY + '_' + ScreenObj[x].posX);
 
             if (StreamData && doc) {
-                StreamData = JSON.parse(StreamData);
 
-                var StreamInfo = JSON.parse(doc.getAttribute(Main_DataAttribute)),
+                var StreamDataObj = JSON.parse(StreamData),
+                    StreamInfo = JSON.parse(doc.getAttribute(Main_DataAttribute)),
                     index,
                     UserIsSet = AddUser_UserIsSet();
 
-                if (StreamData.status === 200) {
+                if (StreamDataObj.status === 200) {
 
-                    Play_PreviewURL = StreamData.url;
-                    Play_PreviewResponseText = StreamData.responseText;
+                    Play_PreviewURL = StreamDataObj.url;
+                    Play_PreviewResponseText = StreamDataObj.responseText;
 
                     var offset = 0,
                         PreviewResponseText = Play_PreviewResponseText,
@@ -20630,7 +20630,7 @@
 
                         error += 'CLIP' + STR_PREVIEW_ERROR_LINK;
 
-                    } else if (ScreenObj[x].screen === Main_HistoryLive && StreamData.status !== 1 && StreamData.status !== 403) {
+                    } else if (ScreenObj[x].screen === Main_HistoryLive && StreamDataObj.status !== 1 && StreamDataObj.status !== 403) {
 
                         index = UserIsSet ? Main_history_Exist('live', StreamInfo[7]) : -1;
 
@@ -20647,7 +20647,7 @@
 
                     } else {
 
-                        error += Play_CheckIfIsLiveGetEror(StreamData, ScreenObj[x].screenType === 1);
+                        error += Play_CheckIfIsLiveGetEror(StreamDataObj, ScreenObj[x].screenType === 1);
 
                     }
 
@@ -23991,8 +23991,8 @@
         Main_IconLoad('label_thumb', 'icon-return', STR_GOBACK);
         Main_IconLoad('label_refresh', 'icon-refresh', STR_REFRESH + ":" + STR_GUIDE);
 
-        if (Main_values.Main_OldgameSelected !== Main_values.Main_gameSelected ||
-            ScreenObj[key].gameSelected !== Main_values.Main_gameSelected)
+        if (!Main_A_equals_B_No_Case(Main_values.Main_OldgameSelected, Main_values.Main_gameSelected) ||
+            !Main_A_equals_B_No_Case(ScreenObj[key].gameSelected, Main_values.Main_gameSelected))
             ScreenObj[key].status = false;
 
         ScreenObj[key].gameSelected = Main_values.Main_gameSelected;
@@ -28938,17 +28938,28 @@
             var doc = Main_getElementById(UserLiveFeed_ids[3] + UserLiveFeed_FeedPosX + '_' + UserLiveFeed_FeedPosY[UserLiveFeed_FeedPosX]);
 
             if (StreamData && doc) {
-                StreamData = JSON.parse(StreamData);
 
-                var StreamInfo = JSON.parse(doc.getAttribute(Main_DataAttribute)),
+                var StreamDataObj = JSON.parse(StreamData),
+                    StreamInfo = JSON.parse(doc.getAttribute(Main_DataAttribute)),
                     isVod = UserLiveFeed_FeedPosX >= UserLiveFeedobj_UserVodPos,
                     error;
 
-                if (StreamData.status === 200) {
+                Play_PreviewId = StreamInfo[14];
 
-                    Play_PreviewURL = StreamData.url;
-                    Play_PreviewResponseText = StreamData.responseText;
-                    Play_PreviewId = StreamInfo[14];
+                if (Play_MultiEnable) {
+
+                    for (var i = 0; i < Play_MultiArray_length; i++) {
+
+                        if (Play_MultiArray[i].data.length > 0 && Main_A_equals_B(Play_MultiArray[i].data[14], Play_PreviewId)) return;
+
+                    }
+
+                }
+
+                if (StreamDataObj.status === 200) {
+
+                    Play_PreviewURL = StreamDataObj.url;
+                    Play_PreviewResponseText = StreamDataObj.responseText;
                     UserLiveFeed_PreviewOffset = 0;
 
                     if (!UserLiveFeed_CheckIfIsLiveResultThumb) {
@@ -29026,7 +29037,7 @@
 
                 } else {
 
-                    error = StreamInfo[6] + STR_SPACE + Play_CheckIfIsLiveGetEror(StreamData, isVod);
+                    error = StreamInfo[6] + STR_SPACE + Play_CheckIfIsLiveGetEror(StreamDataObj, isVod);
 
                 }
 
@@ -29970,7 +29981,7 @@
     function UserLiveFeedobj_ShowCurrentGame() {
         UserLiveFeedobj_SetBottomText(2);
 
-        UserLiveFeedobj_ShowFeedCheck(UserLiveFeedobj_CurrentGamePos, (UserLiveFeedobj_CurrentGameName !== Play_data.data[3]));
+        UserLiveFeedobj_ShowFeedCheck(UserLiveFeedobj_CurrentGamePos, !Main_A_equals_B_No_Case(UserLiveFeedobj_CurrentGameName, Play_data.data[3]));
         UserLiveFeedobj_CurrentGameName = Play_data.data[3];
     }
 
@@ -30095,7 +30106,7 @@
     function UserLiveFeedobj_ShowCurrentUserAGame() {
         UserLiveFeedobj_SetBottomText(7);
 
-        UserLiveFeedobj_ShowFeedCheck(UserLiveFeedobj_UserAGamesPos, (UserLiveFeedobj_CurrentUserAGameName !== UserLiveFeedobj_CurrentUserAGameNameEnter));
+        UserLiveFeedobj_ShowFeedCheck(UserLiveFeedobj_UserAGamesPos, !Main_A_equals_B_No_Case(UserLiveFeedobj_CurrentUserAGameName, UserLiveFeedobj_CurrentUserAGameNameEnter));
         UserLiveFeedobj_CurrentUserAGameName = UserLiveFeedobj_CurrentUserAGameNameEnter;
         Main_IconLoad('icon_feed_back', 'icon-arrow-left', STR_BACK_USER_GAMES + STR_USER + STR_SPACE + STR_GAMES);
         Main_RemoveClass('icon_feed_back', 'opacity_zero');
@@ -30177,7 +30188,7 @@
     function UserLiveFeedobj_ShowCurrentAGame() {
         UserLiveFeedobj_SetBottomText(0);
 
-        UserLiveFeedobj_ShowFeedCheck(UserLiveFeedobj_AGamesPos, (UserLiveFeedobj_CurrentAGameName !== UserLiveFeedobj_CurrentAGameNameEnter));
+        UserLiveFeedobj_ShowFeedCheck(UserLiveFeedobj_AGamesPos, !Main_A_equals_B_No_Case(UserLiveFeedobj_CurrentAGameName, UserLiveFeedobj_CurrentAGameNameEnter));
         UserLiveFeedobj_CurrentAGameName = UserLiveFeedobj_CurrentAGameNameEnter;
         Main_IconLoad('icon_feed_back', 'icon-arrow-left', STR_BACK_USER_GAMES + STR_GAMES);
         Main_RemoveClass('icon_feed_back', 'opacity_zero');
