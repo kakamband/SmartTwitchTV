@@ -6993,7 +6993,7 @@
     var Main_stringVersion_Min = '.261';
     var Main_version_java = 45; //Always update (+1 to current value) Main_version_java after update Main_stringVersion_Min or a major update of the apk is released
     var Main_minversion = 'September 27 2020';
-    var Main_version_web = 86; //Always update (+1 to current value) Main_version_web after update Main_minversion or a major update of the web part of the app
+    var Main_version_web = 87; //Always update (+1 to current value) Main_version_web after update Main_minversion or a major update of the web part of the app
     var Main_versionTag = Main_stringVersion + Main_stringVersion_Min + '-' + Main_minversion;
 
     var Main_cursorYAddFocus = -1;
@@ -19829,8 +19829,7 @@
             );
 
             //If the scroll position is at the end of the list after a loading success focus
-            if (Main_ThumbOpenIsNull((ScreenObj[key].posY + 1) + '_0', ScreenObj[key].ids[0])) {
-
+            if (ScreenObj[key].itemsCount && Main_ThumbOpenIsNull((ScreenObj[key].posY + 1) + '_0', ScreenObj[key].ids[0])) {
                 Screens_addFocus(true, key);
 
             }
